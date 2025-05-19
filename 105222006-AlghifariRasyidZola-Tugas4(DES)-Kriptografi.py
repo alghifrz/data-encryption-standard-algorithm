@@ -116,7 +116,6 @@ def left_shift(bits, n):
 def xor(a, b):
     return [i ^ j for i, j in zip(a, b)]
 
-# --- DES Core ---
 def generate_keys(key_bits):
     key_permuted = permute(key_bits, PC1)
     C, D = key_permuted[:28], key_permuted[28:]
@@ -162,7 +161,6 @@ def des_encrypt(plaintext, key):
     cipher_bits = des_encrypt_block(text_bits, key_bits)
     return bits_to_text(cipher_bits)
 
-# --- Output Converters ---
 def bytes_to_hex(text):
     return ''.join([f'{ord(c):02x}' for c in text])
 
@@ -172,10 +170,12 @@ def bytes_to_bin(text):
 def bytes_to_base64(text):
     return base64.b64encode(text.encode()).decode()
 
-# --- Testing Main ---
 if __name__ == '__main__':
     plaintext = "computer"
     key = "12345678"
+    print(text_to_bits(plaintext))
+    print(text_to_bits(key))
+    
     cipher = des_encrypt(plaintext, key)
     print("Encrypted (HEX):", bytes_to_hex(cipher))
     print("Encrypted (BIN):", bytes_to_bin(cipher))
